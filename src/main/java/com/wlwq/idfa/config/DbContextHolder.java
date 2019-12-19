@@ -1,5 +1,9 @@
 package com.wlwq.idfa.config;
 
+/**
+ * @author lzh
+ * 设置数据源
+ */
 public class DbContextHolder {
 
     private static final ThreadLocal contextHolder = new ThreadLocal<>();

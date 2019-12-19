@@ -3,36 +3,50 @@ package com.wlwq.idfa.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wlwq.idfa.entity.User;
 import com.wlwq.idfa.mapper.db1.UserMapper;
-import com.wlwq.idfa.mapper.db2.UserMapper2;
-import com.wlwq.idfa.mapper.db3.UserMapper3;
+import com.wlwq.idfa.mapper.db2.UserMapperDb2;
+import com.wlwq.idfa.mapper.db3.UserMapperDb3;
 import com.wlwq.idfa.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+/**
+ * <p>
+ *  服务实现类
+ * </p>
+ *
+ * @author lzh
+ * @since 2019-12-19
+ */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
-
     @Autowired
     private UserMapper userMapper;
 
     @Autowired
-    private UserMapper2 userMapper2;
+    private UserMapperDb2 userMapperDb22;
 
     @Autowired
-    private UserMapper3 userMapper3;
+    private UserMapperDb3 userMapperDb33;
 
     @Override
-    public User selectOneByNickname(String nickName) {
-        return userMapper.findOneByNickname(nickName);
+    public int deleteById(Long id) {
+        return userMapper.deleteById(id);
     }
 
     @Override
-    public User selectOneByUsername2(String username) {
-        return userMapper2.findOneByUsername(username);
+    public List<User> findAllData() {
+        return userMapper.findAllData();
     }
 
     @Override
-    public User selectOneByUsername3(String username) {
-        return userMapper3.findOneByUsername(username);
+    public List<User> findAllDataDb2() {
+        return userMapperDb22.findAllData();
+    }
+
+    @Override
+    public List<User> findAllDataDb3() {
+        return userMapperDb33.findAllData();
     }
 }

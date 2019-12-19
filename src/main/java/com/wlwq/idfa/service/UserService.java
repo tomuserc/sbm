@@ -1,14 +1,26 @@
 package com.wlwq.idfa.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.wlwq.idfa.entity.User;
+import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
+/**
+ * <p>
+ *  服务类
+ * </p>
+ *
+ * @author lzh
+ * @since 2019-12-19
+ */
 public interface UserService extends IService<User> {
 
-    User selectOneByNickname(String nickName);
+    int deleteById(Long id);
 
-    User selectOneByUsername2(String username);
+    List<User> findAllData();
 
-    User selectOneByUsername3(String username);
+    List<User> findAllDataDb2();
+
+    List<User> findAllDataDb3();
 
 }

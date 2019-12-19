@@ -1,6 +1,5 @@
 package com.wlwq.idfa.config;
 
-import com.alibaba.druid.sql.parser.Lexer;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -9,7 +8,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * @author 迪富
+ * @author lzh
+ * 根据文件包自动切换数据源
  */
 @Component
 @Order(value = -100)

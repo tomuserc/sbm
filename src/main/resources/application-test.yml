@@ -1,0 +1,44 @@
+server:
+  port: 8082
+  servlet:
+    application-display-name: idfa
+    context-path: /idfa
+spring:
+  security:
+    basic:
+      enabled: true
+    user:
+      name: admin
+      password: 123456
+  aop:
+    proxy-target-class: true
+    auto: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      db1:
+        username: root
+        password: root
+        url: jdbc:mysql://localhost:3306/idfa?useUnicode=true&amp;characterEncoding=utf-8
+        driver-class-name: com.mysql.jdbc.Driver
+      db2:
+        username: root
+        password: root
+        url: jdbc:mysql://localhost:3306/idfa2?useUnicode=true&amp;characterEncoding=utf-8
+        driver-class-name: com.mysql.jdbc.Driver
+      db3:
+        username: root
+        password: root
+        url: jdbc:mysql://localhost:3306/idfa3?useUnicode=true&amp;characterEncoding=utf-8
+        driver-class-name: com.mysql.jdbc.Driver
+#扫描pojo类的位置,在此处指明扫描实体类的包，在mapper中就可以不用写pojo类的全路径名了
+mybatis-plus:
+  # mapper-locations: classpath*:/mapper/*.xml
+  typeAliasesPackage: com.wlwq.idfa.entity
+  global-config:
+    db-config:
+      id-type: id_worker
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+

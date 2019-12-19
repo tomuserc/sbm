@@ -7,16 +7,22 @@ import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author lzh
+ * druid 数据源载入
+ */
 @Configuration
 public class MybatisPlusConfig {
 
@@ -60,7 +66,7 @@ public class MybatisPlusConfig {
         targetDataSources.put(DBTypeEnum.db2.getValue(), db2);
         targetDataSources.put(DBTypeEnum.db3.getValue(), db3);
         dynamicDataSource.setTargetDataSources(targetDataSources);
-        dynamicDataSource.setDefaultTargetDataSource(db2);
+        dynamicDataSource.setDefaultTargetDataSource(db1);
         return dynamicDataSource;
     }
 
@@ -74,25 +80,13 @@ public class MybatisPlusConfig {
         configuration.setMapUnderscoreToCamelCase(true);
         configuration.setCacheEnabled(false);
         sqlSessionFactory.setConfiguration(configuration);
-        //PerformanceInterceptor(),OptimisticLockerInterceptor()
         //添加分页功能
         sqlSessionFactory.setPlugins(new Interceptor[]{
                 paginationInterceptor()
         });
-//        sqlSessionFactory.setGlobalConfig(globalConfiguration());
+        sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath*:/mapper/**/*Mapper.xml"));
         return sqlSessionFactory.getObject();
     }
 
- /*   @Bean
-    public GlobalConfiguration globalConfiguration() {
-        GlobalConfiguration conf = new GlobalConfiguration(new LogicSqlInjector());
-        conf.setLogicDeleteValue("-1");
-        conf.setLogicNotDeleteValue("1");
-        conf.setIdType(0);
-        conf.setMetaObjectHandler(new MyMetaObjectHandler());
-        conf.setDbColumnUnderline(true);
-        conf.setRefresh(true);
-        return conf;
-    }*/
 
 }
